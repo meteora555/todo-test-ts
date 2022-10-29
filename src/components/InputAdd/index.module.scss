@@ -1,0 +1,21 @@
+.inputAdd{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    margin-bottom: 15px;
+    &Value{
+        border: 1px solid #212121;
+        border-radius: 5px 0px 0px 5px;
+        padding: 9px 10px;
+        background: #e8e8e8;
+        &::placeholder{
+            color: #a5a3a3;
+        }
+    }
+    &Btn{
+        border:none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        background: #2d8cf8ce url('./images/plus.svg') no-repeat center center;
+    }
+}
