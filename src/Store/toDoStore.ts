@@ -12,7 +12,7 @@ interface ToDoStore {
   items: ToDo[];
   createItem: (title: string) => void;
   updateItem: (id: string, title: string) => void;
-  doneItem: (id: string, isDone: boolean) => void;
+  doneItem: (id: string) => void;
   removeItem: (id: string) => void;
 }
 //Создаем наш стейт, и в нем реализовываем логику наших методов, создать обновить, выполнено, удалить
@@ -40,13 +40,16 @@ export const useToDoStore = create<ToDoStore>((set, get) => ({
       })),
     });
   },
-  doneItem: (id: string, isDone: boolean) => {
+  doneItem: (id: string) => {
     const { items } = get();
     set({
-      items: items.map((item) => ({
-        ...item,
-        isDone: isDone ? true : false,
-      })),
+      items: items.map((item) => {
+        if (item.id !== id) return item;
+        return {
+          ...item,
+          isDone: !item.isDone,
+        };
+      }),
     });
   },
   removeItem: (id: string) => {

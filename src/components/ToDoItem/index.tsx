@@ -37,10 +37,7 @@ export const ToDoItem: React.FC<ToDoItemProps> = ({
           disabled={isEdit}
           checked={checked}
           className={styles.ToDoItemCheckbox}
-          // onClick={() => {
-          //   isComplited(id, true);
-          //   console.log(isComplited);
-          // }}
+          //
           onChange={(event) => {
             setChecked(event.target.checked);
             if (event.target.checked) {
