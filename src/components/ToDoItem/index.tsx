@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useToDoStore } from '../../Store/toDoStore';
 
 import styles from './index.module.scss';
 
@@ -6,7 +7,7 @@ import styles from './index.module.scss';
 interface ToDoItemProps {
   id: string;
   title: string;
-  isComplited: (id: string, isDone: boolean) => void;
+  isComplited: (id: string) => void;
   isEdited: (id: string, title: string) => void;
   isRemoved: (id: string) => void;
 }
@@ -18,7 +19,6 @@ export const ToDoItem: React.FC<ToDoItemProps> = ({
   isEdited,
   isRemoved,
 }) => {
-  const [checked, setChecked] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(title);
   const editText = useRef<HTMLInputElement>(null);
@@ -35,14 +35,9 @@ export const ToDoItem: React.FC<ToDoItemProps> = ({
         <input
           type="checkbox"
           disabled={isEdit}
-          checked={checked}
           className={styles.ToDoItemCheckbox}
-          //
-          onChange={(event) => {
-            setChecked(event.target.checked);
-            if (event.target.checked) {
-              isComplited(id, true);
-            }
+          onChange={() => {
+            isComplited(id);
           }}
         />
         {isEdit ? (
